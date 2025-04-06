@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fashion Forward Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        #preview {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            display: none;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 2% auto;
+            padding: 20px;
+            width: 95%;
+            max-width: 1400px; 
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+        }
+        #report-img {
+            width: 100%;
+            height: auto;
+            max-height: 90vh; 
+            object-fit: contain;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fashion Forward Finder - DEMO</h1>
+    <br><br>
+    <h2>Select an Image</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label class="upload-btn">
+            Choose Image
+            <input type="file" name="image" accept="image/*" onchange="previewImage(event)">
+        </label>
+
+        <div>
+            <img id="preview" src="#" alt="Image Preview">
+        </div>
+
+        <br><br>
+        <button type="submit" class="upload-btn">Search Amazon</button>
+    </form>
+
+    <br><br>
+
+    <button class="upload-btn" onclick="openModal('trainingModal')">Show Training Report</button>
+    <button class="upload-btn" onclick="openModal('evaluationModal')">Show Evaluation Report</button>
+
+    <div id="trainingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('trainingModal')">&times;</span>
+            <h2>Training Report</h2>
+            <img id="report-img" src="{{ url_for('static', filename='training_report_graph.png') }}" alt="Training Report">
+        </div>
+    </div>
+    <div id="evaluationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('evaluationModal')">&times;</span>
+            <h2>Evaluation Report</h2>
+            <img id="report-img" src="{{ url_for('static', filename='evaluation_report_graph.png') }}" alt="Evaluation Report">
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openModal(modalName) {
+            document.getElementById(modalName).style.display = "block";
+        }
+
+        function closeModal(modalName) {
+            document.getElementById(modalName).style.display = "none";
+        }
+
+        // Optional: Close modal when clicking outside content
+        window.onclick = function(event) {
+            const modal = document.getElementById("trainingModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

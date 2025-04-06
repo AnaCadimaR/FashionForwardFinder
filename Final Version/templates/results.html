@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #f8f8f8; }
+        img { width: 100px; }
+    </style>
+</head>
+<body>
+
+    <h1>Results for "{{ keyword }}"</h1>
+    <br />
+    <a href="{{ url_for('upload_image') }}">&#8592; Try another image</a>
+
+    {% if results %}
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Link</th>
+            </tr>
+            {% for product in results %}
+                <tr>
+                    <td><img src="{{ product.mainImageUrl or '#' }}" alt="Product Image"></td>
+                    <td>{{ product.get('title', 'N/A') }}</td>
+                    <td>{{ product.get('brand', 'N/A') }}</td>
+                    <td>{{ product.get('price', {}).get('display', 'Not Available') if product.get('price') else 'Not Available' }}</td>
+                    <td>{{ product.get('rating', 'N/A') }}</td>
+                    <td><a href="{{ product.get('url', '#') }}" target="_blank">View Product</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No relevant products found.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('upload_image') }}">&#8592; Try another image</a>
+
+</body>
+</html>

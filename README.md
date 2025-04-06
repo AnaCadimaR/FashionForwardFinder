@@ -114,3 +114,9 @@ EPOCHS -> defines the quantity of epochs to train the model (10 is the suggested
 MAX_HEIGHT -> image resize value for height  (restnet suggest a value of 224)
 MAX_WIDTH -> image resize value for width  (restnet suggest a value of 224)
 
+COMMANDS:
+PY -3.11 .\utilities.py
+py -3.11 .\model_eval.py
+py -3.11 .\config.py
+py -3.11 .\test_model.py
+py -3.11 .\model_with_recommendations.py

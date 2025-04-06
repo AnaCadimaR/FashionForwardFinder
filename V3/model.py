@@ -26,9 +26,9 @@ with open(train_attr_path, "r", encoding="utf-8") as f:
     attribute_labels = np.array([[int(x) for x in line.split()] for line in f.readlines()])
 
 # limit the dataset to x number or records, comment to take the full amount
-image_paths = image_paths[:2000]
-category_labels = category_labels[:2000]
-attribute_labels = attribute_labels[:2000]
+#image_paths = image_paths[:2000]
+#category_labels = category_labels[:2000]
+#attribute_labels = attribute_labels[:2000]
 
 # Adjust category labels to start from 0
 category_labels = category_labels - 1
@@ -63,8 +63,7 @@ model.compile(
     },
     metrics={
         "category_output": "accuracy",
-        "attribute_output": "binary_accuracy"
-    })
+        "attribute_output": "binary_accuracy"})
 
 model.summary()
 
@@ -73,7 +72,6 @@ history = model.fit(
     epochs=EPOCHS,
    verbose=1)
 
-#History saving
 model.save(MODEL_SAVE_PATH)
 print(f"Model saved at: {MODEL_SAVE_PATH}") 
 

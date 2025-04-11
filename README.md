@@ -115,8 +115,27 @@ MAX_HEIGHT -> image resize value for height  (restnet suggest a value of 224)
 MAX_WIDTH -> image resize value for width  (restnet suggest a value of 224)
 
 COMMANDS:
-PY -3.11 .\utilities.py
+
+py -3.11 .\model.py
 py -3.11 .\model_eval.py
-py -3.11 .\config.py
-py -3.11 .\test_model.py
 py -3.11 .\model_with_recommendations.py
+py -3.11 .\model_unit_test.py
+PY -3.11 .\utilities.py
+py -3.11 .\config.py
+py -3.11 .\demo.py
+
+
+model_unit_test.file
+"""TESTING THE MODEL PREDICTION AND THE SEARCH_KEYWORD"""
+model_training_history
+"""GENERATING THE REPORT'S TRAINING HISTORY: GRAPHS AND EXCEL'S TRAINING"""
+model_eval
+"""EVALUATING MODEL'S CONFIDENCE. GENERATING EVALUATION'S REPORT AND GRAPH"""
+model_with_recommendations
+"""IMPLEMENTATION OF RECOMMENDATION V1. CONNECTING THE MODEL TO AMAZON: PROOF OF CONCEPT (POC)"""
+config.file
+"""Configurations of the model. Established parameters"""
+utilities.file
+"""COMMON FUNCTIONS USED IN THE PROJECT"""
+demo.file
+"""PROOF OF CONCEPT #2"""
